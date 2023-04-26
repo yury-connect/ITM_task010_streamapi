@@ -6,8 +6,9 @@ import java.util.List;
 public class Solution {
 
     /**
-    *Найдите все уникальные теги из всех задач
-    *Решить необходимо в 1 stream.
+    * Найдите все уникальные теги из всех задач
+    * Решить необходимо в 1 stream.
+    * Пример вывода: "java8", "git", "mobile", "blogging", "coding", "writing", "streams", "ddd"
     */
 
     public static void main(String[] args) {

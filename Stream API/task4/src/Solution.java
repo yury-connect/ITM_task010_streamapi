@@ -6,8 +6,8 @@ import java.util.List;
 public class Solution {
 
     /*
-    *Проверьте, все ли задачи чтения имеют тег books.
-    *Решить необходимо в 1 stream.
+    * Проверьте, все ли задачи чтения имеют тег books.
+    * Решить необходимо в 1 stream.
     */
 
     public static void main(String[] args) {

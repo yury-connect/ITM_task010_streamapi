@@ -6,8 +6,9 @@ import java.util.List;
 public class Solution {
 
     /**
-    *Найдите только уникальные задачи со статусом READING
-    *Решить необходимо в 1 stream.
+    * Найдите только уникальные задачи со статусом READING
+    * Решить необходимо в 1 stream.
+    * Правильный ответ: task1, task2, task5
     */
 
     public static void main(String[] args) {
