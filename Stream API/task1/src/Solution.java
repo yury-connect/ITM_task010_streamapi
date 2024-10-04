@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Solution {
 
@@ -18,11 +19,20 @@ public class Solution {
         Task task5 = new Task(5, "Read Domain Driven Design book", TaskType.READING, LocalDate.of(2015, Month.JULY, 5)).addTag("ddd").addTag("books").addTag("reading");
         List<Task> tasks = Arrays.asList(task1, task2, task3, task4, task5);
 
+        System.out.println("\n\tБазовый перечень книг:");
+        tasks.forEach(System.out::println);
+
+        System.out.println("\n\tПодсказка должно вывести книги с id: 5, 2, 1");
+        System.out.println("\n\tПеречень книг согласно задания:");
         allReadingTasks(tasks).forEach(System.out::println);
     }
 
     private static List<String> allReadingTasks(List<Task> tasks) {
-        return null;
-        // Ваш код здесь
+        List<String> result = tasks.stream().
+                filter(task -> task.getType() == TaskType.READING)
+                .sorted((t1, t2) -> t2.getCreatedOn().compareTo(t1.getCreatedOn())) // отсортируем в обратном порядке, т.к. по условию они уже отсортированы по дате создания ПО ВОЗРАСТАНИЮ
+                .map(Task::toString)
+                .collect(Collectors.toList());
+        return result;
     }
 }

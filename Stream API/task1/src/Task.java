@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 
 public class Task {
     private final Integer id;
@@ -9,14 +11,15 @@ public class Task {
 
     private final  TaskType type;
 
-    private final LocalDate createdOn;
-
+    private final LocalDate createdOn; // Дата создания
 
     private boolean done = false;
 
     private Set<String> tags = new HashSet<>();
 
     private LocalDate dueOn;
+
+
 
     public Task(Integer id, String title, TaskType type, LocalDate createdOn) {
         this.id = id;
@@ -25,11 +28,12 @@ public class Task {
         this.createdOn = createdOn;
     }
 
-
     public Task addTag(String tag){
         this.tags.add(tag);
         return this;
     }
+
+
 
     public Integer getId() {
         return id;
@@ -69,5 +73,18 @@ public class Task {
 
     public void setDueOn(LocalDate dueOn) {
         this.dueOn = dueOn;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", type=" + type +
+                ", createdOn=" + createdOn +
+                ", done=" + done +
+                ", tags=" + tags.stream().map(s -> s + ",").collect(Collectors.joining()) +
+                " dueOn=" + dueOn +
+                '}';
     }
 }
