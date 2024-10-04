@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Solution {
 
@@ -22,7 +23,14 @@ public class Solution {
     }
 
     private static Boolean allReadingTasks(List<Task> tasks) {
-        return null;
-        // Ваш код здесь
+        final String target = "books";
+        AtomicBoolean result = new AtomicBoolean(true);
+        tasks.stream()
+                .forEach(t -> {
+                    if (t.getTags().contains(target)) {
+                        result.set(false);
+                    }
+                });
+        return result.equals(false);
     }
 }
