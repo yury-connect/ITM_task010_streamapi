@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Solution {
 
@@ -19,11 +20,20 @@ public class Solution {
         Task task5 = new Task(5, "Read Domain Driven Design book", TaskType.READING, LocalDate.of(2015, Month.JULY, 5)).addTag("ddd").addTag("books").addTag("reading");
         List<Task> tasks = Arrays.asList(task1, task2, task3, task4, task5);
 
+        System.out.println("\n\tБазовый перечень тэгов из всех задач:");
+        tasks.stream().flatMap(task -> task.getTags().stream()).sorted().forEach(System.out::println);
+
+        System.out.println("\n\tПодсказка: Должно вывести ТОЛЬКО уникальные теги из всех задач");
+
+        System.out.println("\n\tПеречень задач согласно задания:");
         allReadingTasks(tasks).forEach(System.out::println);
     }
 
     private static List<String> allReadingTasks(List<Task> tasks) {
-        return null;
-        // Ваш код здесь
+        return tasks.stream()
+                .flatMap(task -> task.getTags().stream())
+                .distinct()
+                .sorted() // отсортируем для удобочитаемости, хотя этого по заданию и не требуется (но и не возброняется!).
+                .collect(Collectors.toList());
     }
 }
