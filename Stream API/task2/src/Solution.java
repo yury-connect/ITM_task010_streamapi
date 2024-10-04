@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Solution {
 
@@ -17,13 +18,22 @@ public class Solution {
         Task task3 = new Task(3, "Write a mobile application to store my tasks", TaskType.CODING, LocalDate.of(2015, Month.JULY, 3)).addTag("coding").addTag("mobile");
         Task task4 = new Task(4, "Write a blog on Java 8 Streams", TaskType.WRITING, LocalDate.of(2015, Month.JULY, 4)).addTag("blogging").addTag("writing").addTag("streams");
         Task task5 = new Task(5, "Read Domain Driven Design book", TaskType.READING, LocalDate.of(2015, Month.JULY, 5)).addTag("ddd").addTag("books").addTag("reading");
-        List<Task> tasks = Arrays.asList(task1, task2, task3, task4, task5, task5, task5, task3);
+        Task task6 = new Task(6, "Read Domain Driven Design book", TaskType.READING, LocalDate.of(2015, Month.JULY, 5)).addTag("ddd").addTag("books").addTag("reading");
+        List<Task> tasks = Arrays.asList(task1, task2, task3, task4, task5, task5, task5, task3, task6);
 
+        System.out.println("\n\tБазовый перечень задач:");
+        tasks.forEach(System.out::println);
+
+        System.out.println("\n\tПодсказка: Должно вывести задачи в следующем порядке: task1, task2, task5");
+
+        System.out.println("\n\tПеречень задач согласно задания:");
         allReadingTasks(tasks).forEach(System.out::println);
     }
 
     private static List<Task> allReadingTasks(List<Task> tasks) {
-        return null;
-        // Ваш код здесь
+        return tasks.stream()
+                .filter(task -> task.getType() == TaskType.READING)
+                .distinct()
+                .collect(Collectors.toList());
     }
 }
