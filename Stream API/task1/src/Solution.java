@@ -22,17 +22,17 @@ public class Solution {
         System.out.println("\n\tБазовый перечень книг:");
         tasks.forEach(System.out::println);
 
-        System.out.println("\n\tПодсказка должно вывести книги с id: 5, 2, 1");
+        System.out.println("\n\tПодсказка: Должно вывести книги в следующем порядке id: 5, 2, 1");
+
         System.out.println("\n\tПеречень книг согласно задания:");
         allReadingTasks(tasks).forEach(System.out::println);
     }
 
     private static List<String> allReadingTasks(List<Task> tasks) {
-        List<String> result = tasks.stream().
-                filter(task -> task.getType() == TaskType.READING)
-                .sorted((t1, t2) -> t2.getCreatedOn().compareTo(t1.getCreatedOn())) // отсортируем в обратном порядке, т.к. по условию они уже отсортированы по дате создания ПО ВОЗРАСТАНИЮ
-                .map(Task::toString)
-                .collect(Collectors.toList());
-        return result;
+        return tasks.stream(). // создаем поток
+                filter(task -> task.getType() == TaskType.READING) // фильтруем по типу задачи 'TaskType.READING'
+                .sorted((t1, t2) -> t2.getCreatedOn().compareTo(t1.getCreatedOn())) // сортируем в обратном порядке, т.к. по условию они уже отсортированы по дате создания ПО ВОЗРАСТАНИЮ
+                .map(Task::toString) // преобразуем каждый объект в строку
+                .collect(Collectors.toList()); // запакуем в список строк
     }
 }
