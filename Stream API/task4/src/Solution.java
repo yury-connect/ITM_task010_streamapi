@@ -36,14 +36,10 @@ public class Solution {
 
     private static Boolean allReadingTasks(List<Task> tasks) {
         final String targetTag = "books"; // будем искать у каждой задачи тэг "books"
-        final String targetTitlePart = "read"; // будем учитывать только задачи
 
         return tasks.stream()
-                .filter(
-//                        task -> Arrays.stream(task.getTitle().split(" ")).anyMatch(str -> targetTitlePart.equals(str.toLowerCase()))) // будет искать в любом месте строки, но по условию это должно быть 1-м словом в строке, поэтому заменяю данную строку на следующую:
-                        task -> task.getTitle().split(" ")[0].toLowerCase().equals(targetTitlePart)) // т.е. именно первое слово в 'title' должно быть "read"
-                .peek(System.out::println) // вставляю 'подсматривающий' метод, кот-й наблюдает за промежуточными результатами без изменения основного потока данных
-                .allMatch(task -> Arrays.stream(task.getTags().toArray())
-                        .anyMatch(str -> targetTag.equals(str)));
+                .filter(task -> task.getType() == TaskType.READING) // фильтруем только задачи чтения
+                .peek(task -> System.out.println("Checking task: " + task)) // наблюдаем за промежуточными результатами
+                .allMatch(task -> task.getTags().contains(targetTag)); // проверяем, содержит ли задача тег "books"
     }
 }
