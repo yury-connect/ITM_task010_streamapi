@@ -27,7 +27,11 @@ public class Solution {
     }
 
     private static Long allReadingTasks(List<List<Task>> tasks) {
-        return null;
-        // Ваш код здесь
+        final String targetTag = "books";
+
+        return tasks.stream()
+                .flatMap(List::stream) // из каждого элемента 'List' сделаем свой stream, затем соберем их в один. В результате будет 1 список с элементами всех списков.
+                .filter(task -> task.getTags().contains(targetTag))
+                .count(); // подсчитываем количество
     }
 }
